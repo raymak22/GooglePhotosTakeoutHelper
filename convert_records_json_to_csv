@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+import { readFile, createWriteStream } from 'node:fs/promises';
+
+const inputFile = process.argv[2] || './Records.json';
+const outputFile = './history.csv';
+
+// Create a writable stream for the CSV output file
+const writeStream = createWriteStream(outputFile);
+
+// Write the header row to the CSV file
+let csvHeader = 'GPSAltitude,GPSDateTime,GPSLatitude,GPSLongitude,GPSSpeed (m/s),GPSTrack\n';
+writeStream.write(csvHeader);
+
+console.log('Reading', inputFile, '...');
+
+// Read the JSON file and parse it
+const { locations } = JSON.parse(await readFile(inputFile, 'utf-8'));
+
+console.log('Processing ...');
+
+// Process each location and write to the CSV file in chunks
+for (const location of locations) {
+  const row = {
+    'GPSAltitude': location.altitude ?? '',
+    'GPSDateTime': location.timestamp.replace(/-/g, ':').replace('T', ' '),
+    'GPSLatitude': location.latitudeE7 / 1e7,
+    'GPSLongitude': location.longitudeE7 / 1e7,
+    'GPSSpeed (m/s)': location.velocity ?? '',
+    'GPSTrack': location.heading ?? '',
+  };
+
+  // Create a CSV row and write it incrementally to the output file
+  const rowData = Object.values(row).join(',') + '\n';
+  writeStream.write(rowData);  // Write the row to the file
+}
+
+// End the stream when all rows are processed
+writeStream.end();
+
+console.log('Writing history.csv...');
