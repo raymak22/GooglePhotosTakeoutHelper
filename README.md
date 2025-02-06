@@ -3,6 +3,7 @@
 [![latest version downloads](https://img.shields.io/github/downloads/TheLastGimbus/GooglePhotosTakeoutHelper/latest/total?label=latest%20version%20downloads)](https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper/releases/latest)
 [![resolved Github issues](https://img.shields.io/github/issues-closed/TheLastGimbus/GooglePhotosTakeoutHelper?label=resolved%20issues)](https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper/issues)
 [![commit activity](https://img.shields.io/github/commit-activity/y/TheLastGimbus/GooglePhotosTakeoutHelper)](https://github.com/TheLastGimbus/GooglePhotosTakeoutHelper/graphs/contributors)
+https://github.com/eartharoid/google-timeline-to-exiftool
 
 # Google Photos Takeout Helper 📸🆘
 ## What is this for 🧐
